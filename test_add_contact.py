@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from selenium.webdriver.firefox.webdriver import WebDriver
 import unittest
-from contact import ContactGroup
+from contact import Contact
 
 def is_alert_present(wd):
     try:
@@ -10,7 +10,7 @@ def is_alert_present(wd):
     except:
         return False
 
-class contact(unittest.TestCase):
+class test_add_contact(unittest.TestCase):
     def setUp(self):
         self.wd = WebDriver(capabilities={"marionette": False})
         self.wd.implicitly_wait(60)
@@ -20,50 +20,50 @@ class contact(unittest.TestCase):
         self.open_home_page(wd)
         self.login(wd, username="admin", password="secret")
         self.open_contacts_page(wd)
-        self.init_contacts_creation(wd, ContactGroup(firstName="test", middleName="test", lastName="test", nickname="test", company="tttt", title="ttttt", address="ffffff", home="ffffff",
+        self.init_contacts_creation(wd, Contact(firstName="test", middleName="test", lastName="test", nickname="test", company="tttt", title="ttttt", address="ffffff", home="ffffff",
                                     mobile="567565756756757", email="fff", secondAddress="ferfre", notes="erfrefre"))
         self.logout(wd)
 
     def logout(self, wd):
         wd.find_element_by_link_text("Logout").click()
 
-    def init_contacts_creation(self, wd, contactgroup):
+    def init_contacts_creation(self, wd, contact):
         wd.find_element_by_name("firstname").click()
         wd.find_element_by_name("firstname").clear()
-        wd.find_element_by_name("firstname").send_keys(contactgroup.firstName)
+        wd.find_element_by_name("firstname").send_keys(contact.firstName)
         wd.find_element_by_name("middlename").click()
         wd.find_element_by_name("middlename").clear()
-        wd.find_element_by_name("middlename").send_keys(contactgroup.middleName)
+        wd.find_element_by_name("middlename").send_keys(contact.middleName)
         wd.find_element_by_name("lastname").click()
         wd.find_element_by_name("lastname").clear()
-        wd.find_element_by_name("lastname").send_keys("%s" % contactgroup.lastName)
+        wd.find_element_by_name("lastname").send_keys("%s" % contact.lastName)
         wd.find_element_by_name("nickname").click()
         wd.find_element_by_name("nickname").clear()
-        wd.find_element_by_name("nickname").send_keys("%s" % contactgroup.nickname)
+        wd.find_element_by_name("nickname").send_keys("%s" % contact.nickname)
         wd.find_element_by_name("title").click()
         wd.find_element_by_name("title").clear()
-        wd.find_element_by_name("title").send_keys("%s" % contactgroup.company)
+        wd.find_element_by_name("title").send_keys("%s" % contact.company)
         wd.find_element_by_name("company").click()
         wd.find_element_by_name("company").clear()
-        wd.find_element_by_name("company").send_keys("%s" % contactgroup.title)
+        wd.find_element_by_name("company").send_keys("%s" % contact.title)
         wd.find_element_by_name("address").click()
         wd.find_element_by_name("address").clear()
-        wd.find_element_by_name("address").send_keys("%s" % contactgroup.address)
+        wd.find_element_by_name("address").send_keys("%s" % contact.address)
         wd.find_element_by_name("home").click()
         wd.find_element_by_name("home").clear()
-        wd.find_element_by_name("home").send_keys("%s" % contactgroup.home)
+        wd.find_element_by_name("home").send_keys("%s" % contact.home)
         wd.find_element_by_name("mobile").click()
         wd.find_element_by_name("mobile").clear()
-        wd.find_element_by_name("mobile").send_keys("%s" % contactgroup.mobile)
+        wd.find_element_by_name("mobile").send_keys("%s" % contact.mobile)
         wd.find_element_by_name("email").click()
         wd.find_element_by_name("email").clear()
-        wd.find_element_by_name("email").send_keys("%s@t.ru" % contactgroup.email)
+        wd.find_element_by_name("email").send_keys("%s@t.ru" % contact.email)
         wd.find_element_by_name("address2").click()
         wd.find_element_by_name("address2").clear()
-        wd.find_element_by_name("address2").send_keys("%s" % contactgroup.secondAddress)
+        wd.find_element_by_name("address2").send_keys("%s" % contact.secondAddress)
         wd.find_element_by_name("notes").click()
         wd.find_element_by_name("notes").clear()
-        wd.find_element_by_name("notes").send_keys(contactgroup.notes)
+        wd.find_element_by_name("notes").send_keys(contact.notes)
         wd.find_element_by_xpath("//div[@id='content']/form/input[21]").click()
 
     def open_contacts_page(self, wd):

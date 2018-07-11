@@ -22,6 +22,3 @@ def test_add_empty_group(app):
     app.group.create(Group(name="", header="", footer=""))
     app.session.logout()
 
-
-if __name__ == '__main__':
-    unittest.main()

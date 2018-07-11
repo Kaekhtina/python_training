@@ -1,88 +1,14 @@
-# -*- coding: utf-8 -*-
-from selenium.webdriver.firefox.webdriver import WebDriver
-import unittest
-from contactgroup import ContactGroup
-
-def is_alert_present(wd):
-    try:
-        wd.switch_to_alert().text
-        return True
-    except:
-        return False
-
-class contact(unittest.TestCase):
-    def setUp(self):
-        self.wd = WebDriver(capabilities={"marionette": False})
-        self.wd.implicitly_wait(60)
-    
-    def test_contact(self):
-        wd = self.wd
-        self.open_home_page(wd)
-        self.login(wd, username="admin", password="secret")
-        self.open_contacts_page(wd)
-        self.init_contacts_creation(wd, ContactGroup(firstName="test", middleName="test", lastName="test", nickname="test", company="tttt", title="ttttt", address="ffffff", home="ffffff",
-                                    mobile="567565756756757", email="fff", secondAddress="ferfre", notes="erfrefre"))
-        self.logout(wd)
-
-    def logout(self, wd):
-        wd.find_element_by_link_text("Logout").click()
-
-    def init_contacts_creation(self, wd, contactgroup):
-        wd.find_element_by_name("firstname").click()
-        wd.find_element_by_name("firstname").clear()
-        wd.find_element_by_name("firstname").send_keys(contactgroup.firstName)
-        wd.find_element_by_name("middlename").click()
-        wd.find_element_by_name("middlename").clear()
-        wd.find_element_by_name("middlename").send_keys(contactgroup.middleName)
-        wd.find_element_by_name("lastname").click()
-        wd.find_element_by_name("lastname").clear()
-        wd.find_element_by_name("lastname").send_keys("%s" % contactgroup.lastName)
-        wd.find_element_by_name("nickname").click()
-        wd.find_element_by_name("nickname").clear()
-        wd.find_element_by_name("nickname").send_keys("%s" % contactgroup.nickname)
-        wd.find_element_by_name("title").click()
-        wd.find_element_by_name("title").clear()
-        wd.find_element_by_name("title").send_keys("%s" % contactgroup.company)
-        wd.find_element_by_name("company").click()
-        wd.find_element_by_name("company").clear()
-        wd.find_element_by_name("company").send_keys("%s" % contactgroup.title)
-        wd.find_element_by_name("address").click()
-        wd.find_element_by_name("address").clear()
-        wd.find_element_by_name("address").send_keys("%s" % contactgroup.address)
-        wd.find_element_by_name("home").click()
-        wd.find_element_by_name("home").clear()
-        wd.find_element_by_name("home").send_keys("%s" % contactgroup.home)
-        wd.find_element_by_name("mobile").click()
-        wd.find_element_by_name("mobile").clear()
-        wd.find_element_by_name("mobile").send_keys("%s" % contactgroup.mobile)
-        wd.find_element_by_name("email").click()
-        wd.find_element_by_name("email").clear()
-        wd.find_element_by_name("email").send_keys("%s@t.ru" % contactgroup.email)
-        wd.find_element_by_name("address2").click()
-        wd.find_element_by_name("address2").clear()
-        wd.find_element_by_name("address2").send_keys("%s" % contactgroup.secondAddress)
-        wd.find_element_by_name("notes").click()
-        wd.find_element_by_name("notes").clear()
-        wd.find_element_by_name("notes").send_keys(contactgroup.notes)
-        wd.find_element_by_xpath("//div[@id='content']/form/input[21]").click()
-
-    def open_contacts_page(self, wd):
-        wd.find_element_by_link_text("add new").click()
-
-    def login(self, wd, username, password):
-        wd.find_element_by_name("user").click()
-        wd.find_element_by_name("user").clear()
-        wd.find_element_by_name("user").send_keys(username)
-        wd.find_element_by_name("pass").click()
-        wd.find_element_by_name("pass").clear()
-        wd.find_element_by_name("pass").send_keys(password)
-        wd.find_element_by_xpath("//form[@id='LoginForm']/input[3]").click()
-
-    def open_home_page(self, wd):
-        wd.get("http://localhost:8080/addressbook/group.php")
-
-    def tearDown(self):
-        self.wd.quit()
-
-if __name__ == '__main__':
-    unittest.main()
+class ContactGroup:
+    def __init__(self, firstName, middleName, lastName, nickname, company, title, address, mobile, email, secondAddress, home, notes):
+        self.firstName = firstName
+        self.middleName = middleName
+        self.lastName = lastName
+        self.nickname = nickname
+        self.company = company
+        self.title = title
+        self.address = address
+        self.mobile = mobile
+        self.email = email
+        self.secondAddress = secondAddress
+        self.home = home
+        self.notes = notes
